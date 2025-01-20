@@ -4,13 +4,13 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #000000;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #000000;
   }
 }
 
@@ -18,4 +18,95 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.section.populated {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: scroll;
+}
+
+.bubble {
+  margin: 8px;
+  padding: 8px;
+  font-size: 15px;
+  border: none;
+  color: #383838;
+  box-shadow: #959daa 0 8px 24px;
+  width: 80%;
+  text-align: left;
+}
+
+.bubble.user {
+  border-radius: 20px 20px 0 20px;
+  background-color: #e1f4ffff;
+  margin-left: auto;
+}
+
+.bubble.assistant {
+  border-radius: 20px 20px 20px 0;
+  background-color: #dce7ff;
+}
+
+.prompt-suggestion-button {
+  margin: 8px;
+  padding: 8px;
+  font-size: 15px;
+  border: none;
+  background-color: #ffffff;
+  color: #383838;
+  border-radius: 10px;
+  box-shadow: #959da533 0 8px 24px;
+}
+
+.prompt-suggestion-row {
+  width: 100%;
+}
+
+.userbubble {
+  background-color: #e0f7fa;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.systembubble {
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.userbubble {
+  background-color: #e0f7fa;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.systembubble {
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.bubble {
+  margin: 8px;
+  padding: 8px;
+  font-size: 15px;
+  border: none;
+  color: #383838;
+  box-shadow: #959daa 0 8px 24px;
+  width: 80%;
+  text-align: left;
+}
+
+.bubble.userbubble {
+  border-radius: 20px 20px 0 20px;
+  background-color: #e1f4ffff;
+  margin-left: auto;
+}
+
+.bubble.systembubble {
+  border-radius: 20px 20px 20px 0;
+  background-color: #dce7ff;
 }
