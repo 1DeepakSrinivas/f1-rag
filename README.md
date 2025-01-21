@@ -16,7 +16,7 @@ This project implements a Retrieval Augmented Generation (RAG) system focused on
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/f1-rag.git
+git clone https://github.com/1DeepakSrinivas/f1-rag.git
 cd f1-rag
 
 # Install dependencies
