@@ -1,40 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# F1-RAG Project
 
-## Getting Started
+## Overview
 
-First, run the development server:
+This project implements a Retrieval Augmented Generation (RAG) system focused on Formula 1 (F1) racing data. RAG combines the power of large language models with specific domain knowledge retrieval to provide accurate and contextual responses.
+
+## Features
+
+- F1 data retrieval and processing through web scraping
+- RAG implementation for F1-specific queries
+- Information retrieval from F1 historical datasets
+- Vector database for efficient similarity search
+- Web scraping using LangChain from predefined sources
+
+## Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Clone the repository
+git clone https://github.com/yourusername/f1-rag.git
+cd f1-rag
+
+# Install dependencies
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technologies Used
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- Next.js
+- TypeScript
+- Databricks
+- LangChain
+- RAG (Retrieval Augmented Generation)
+- Vector Database
+- OpenAI GPT-4 and text-embedding-3-small for text generation
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Environment Setup
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+1. Create a `.env` file in the root directory with the following variables:
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```env
+ASTRA_DB_NAMESPACE="<your_keyspace_name>" (default - default_keyspace)
+ASTRA_DB_COLLECTION="<your_db_collection_name>"
+ASTRA_DB_API_ENDPOINT="<your_db_endpoint>"
+ASTRA_DB_APPLICATION_TOKEN="<your_db_api_key>"
+OPENAI_API_KEY="<your_openai_api_key>"
+```
 
-## Learn More
+2. Set up Databricks:
+   - Create a Databricks workspace
+   - Generate a personal access token
+   - Note down the cluster HTTP path
 
-To learn more about Next.js, take a look at the following resources:
+## Development
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+```bash
+# Install dependencies
+npm install
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Initialize vector database
+npm run seed
 
-## Deploy on Vercel
+# Run development server
+npm run dev
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Build for production
+npm run build
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+# Start production server
+npm start
+```
+
+The application will be available at `http://localhost:3000`

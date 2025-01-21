@@ -77,7 +77,7 @@ export async function POST(req: Request) {
           }
         }
       },
-      onError: (error) => `An error occurred while streaming`,
+      onError: (error) => `An error occurred while streaming ${error}`,
     });
 
     return createDataStreamResponse({
