@@ -26,11 +26,10 @@ npm install
 ## Technologies Used
 
 - Next.js
+- Vercel AI SDK
 - TypeScript
-- Databricks
+- Databricks Astra
 - LangChain
-- RAG (Retrieval Augmented Generation)
-- Vector Database
 - OpenAI GPT-4 and text-embedding-3-small for text generation
 
 ## Environment Setup
@@ -46,6 +45,7 @@ OPENAI_API_KEY="<your_openai_api_key>"
 ```
 
 2. Set up Databricks:
+   - Visit https://astra.datastax.com/
    - Create a Databricks workspace
    - Generate a personal access token
    - Note down the cluster HTTP path
