@@ -9,104 +9,39 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #020036;
     --foreground: #000000;
   }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply text-foreground bg-background font-sans;
 }
 
 .section.populated {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  overflow: scroll;
+  @apply h-full flex flex-col justify-end overflow-scroll;
 }
 
 .bubble {
-  margin: 8px;
-  padding: 8px;
-  font-size: 15px;
-  border: none;
-  color: #383838;
-  box-shadow: #959daa 0 8px 24px;
-  width: 80%;
-  text-align: left;
+  @apply m-2 p-2 text-sm border-none shadow-lg w-4/5 break-words;
 }
 
 .bubble.user {
-  border-radius: 20px 20px 0 20px;
-  background-color: #e1f4ffff;
-  margin-left: auto;
+  @apply rounded-tl-xl rounded-tr-xl rounded-br-none bg-[#e1f4ffff] ml-auto;
 }
 
 .bubble.assistant {
-  border-radius: 20px 20px 20px 0;
-  background-color: #dce7ff;
+  @apply rounded-tl-xl rounded-tr-xl rounded-bl-xl bg-[#dce7ff];
+}
+
+.bubble.system {
+  @apply rounded-tl-xl rounded-tr-xl rounded-bl-xl bg-[#f1f1f1];
 }
 
 .prompt-suggestion-button {
-  margin: 8px;
-  padding: 8px;
-  font-size: 15px;
-  border: none;
-  background-color: #ffffff;
-  color: #383838;
-  border-radius: 10px;
-  box-shadow: #959da533 0 8px 24px;
+  @apply m-2 p-2 text-sm border-none bg-white text-foreground rounded-lg shadow-md;
 }
 
 .prompt-suggestion-row {
-  width: 100%;
-}
-
-.userbubble {
-  background-color: #e0f7fa;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.systembubble {
-  background-color: #f1f1f1;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.userbubble {
-  background-color: #e0f7fa;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.systembubble {
-  background-color: #f1f1f1;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.bubble {
-  margin: 8px;
-  padding: 8px;
-  font-size: 15px;
-  border: none;
-  color: #383838;
-  box-shadow: #959daa 0 8px 24px;
-  width: 80%;
-  text-align: left;
-}
-
-.bubble.userbubble {
-  border-radius: 20px 20px 0 20px;
-  background-color: #e1f4ffff;
-  margin-left: auto;
-}
-
-.bubble.systembubble {
-  border-radius: 20px 20px 20px 0;
-  background-color: #dce7ff;
+  @apply w-full;
 }

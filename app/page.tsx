@@ -18,20 +18,16 @@ const Home = () => {
   } = useChat({
     api: "/api/chat",
     onError: (error) => {
-      // Log errors to console instead of showing them in the UI
       console.error(
         "Chat error:",
         error.message || "An unexpected error occurred"
       );
     },
     onResponse: (response) => {
-      // Remove custom response handling since useChat will automatically
-      // handle the response and update the messages state
       console.log("API Response received:", response);
     },
   });
 
-  // Add prompt text directly to the chat
   const handlePrompt = (promptText: string) => {
     append({
       id: crypto.randomUUID(),
@@ -40,14 +36,32 @@ const Home = () => {
     });
   };
 
-  // Filter out system messages when displaying
+  // Filter out system messages and check if there are any display messages
   const displayMessages = messages.filter(
     (message) => message.role !== "system"
   );
-  const noMessages = !displayMessages || displayMessages.length === 0;
+  const noMessages = displayMessages.length === 0;
+
+  const chatContent = noMessages ? (
+    <div>
+      <p className="text-lg text-black pt-10 px-4">
+        The ultimate F1 Chatbot. Ask F1-GPT anything about the sport of Formula
+        One and receive accurate answers.
+      </p>
+      <PromptSuggestionsRow onPromptClick={handlePrompt} />
+    </div>
+  ) : (
+    <div className="space-y-4">
+      {displayMessages.map((message) => (
+        <Bubble key={message.id} message={message} />
+      ))}
+      {isLoading && <LoadingBubble />}
+    </div>
+  );
+  console.log(chatContent);
 
   return (
-    <main className="flex flex-col justify-between align-center mt-14 mx-6 md:mx-20 lg:mx-60 bg-white shadow-md p-6 md:p-10 rounded-lg min-h-[600px]">
+    <main className="flex flex-col justify-between align-center mt-14 mx-6 md:mx-20 lg:mx-60 bg-[#F2F9FF] shadow-md p-6 md:p-10 rounded-lg min-h-[600px]">
       {/* Header Section */}
       <div className="flex flex-row items-center justify-center">
         <Image
@@ -62,36 +76,25 @@ const Home = () => {
 
       {/* Chat Section */}
       <section
-        className={`flex-grow overflow-y-auto ${
+        className={`flex-grow overflow-y-scroll ${
           noMessages ? "" : "populated"
         } py-4`}
       >
-        {noMessages ? (
-          <div>
-            <p className="text-lg text-black pt-10">
-              The ultimate F1 Chatbot. Ask F1-GPT anything about the sport of
-              Formula One and receive accurate answers.
-            </p>
-            <br />
-            <PromptSuggestionsRow onPromptClick={handlePrompt} />
-          </div>
-        ) : (
-          <div className="space-y-4">
-            {displayMessages.map((message, index) => (
-              <Bubble key={`message-${index}`} message={message} />
-            ))}
-            {isLoading && <LoadingBubble />}
-          </div>
-        )}
+        {chatContent}
       </section>
 
       {/* Input Section */}
       <form
-        onSubmit={handleSubmit}
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (input.trim()) {
+            handleSubmit();
+          }
+        }}
         className="mt-4 flex items-center justify-center w-full"
       >
         <input
-          className="flex-grow w-full max-w-2xl p-2 border-2 border-gray-100 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-red-500"
+          className="flex-grow w-full p-2 border-2 border-gray-100 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-transparent focus:shadow-md"
           onChange={handleInputChange}
           value={input}
           placeholder="Ask me anything..."

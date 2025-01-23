@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     let docContext = "";
 
     const embedding = await openai.embeddings.create({
-      model: "text-embedding-3-small",
+      model: "text-embedding-ada-002",
       input: latestMessage,
       encoding_format: "float",
     });
@@ -69,15 +69,17 @@ export async function POST(req: Request) {
 
     const stream = createDataStream({
       async execute(dataStream) {
+        let accumulatedContent = ""; // Buffer for accumulating message parts
+
         for await (const chunk of response) {
           const content = chunk.choices[0]?.delta?.content;
-          console.log(content);
           if (content) {
-            dataStream.writeData({ content });
+            accumulatedContent += content; // Append to buffer
+            dataStream.writeData({ content: accumulatedContent }); // Send accumulated content
           }
         }
       },
-      onError: (error) => `An error occurred while streaming ${error}`,
+      onError: (error) => `An error occurred while streaming: ${error}`,
     });
 
     return createDataStreamResponse({

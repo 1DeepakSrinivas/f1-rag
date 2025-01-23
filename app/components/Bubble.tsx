@@ -1,30 +1,46 @@
-const Bubble = ({ message }) => {
+import React from "react";
+import PropTypes from "prop-types"; // Prop validation for types
+
+interface Message {
+  content: string;
+  role: "user" | "assistant" | "system";
+}
+
+interface BubbleProps {
+  message: Message & { role: "user" | "assistant" | "system" | "data" };
+}
+
+const Bubble: React.FC<BubbleProps> = ({ message }) => {
+  // Ensure the message has valid content before rendering
   if (!message || !message.content) {
-    console.error("Invalid message object:", message);
     return null;
   }
 
   const { content, role = "user" } = message;
 
-  const bubbleStyles = {
-    user: { backgroundColor: "#e0f7fa", alignSelf: "flex-end" },
-    assistant: { backgroundColor: "#f1f1f1", alignSelf: "flex-start" },
-    system: { backgroundColor: "#ffeb3b", alignSelf: "center", color: "black" }, // Style for system messages
+  // Dynamic class for different roles
+  const bubbleClass = {
+    user: "bubble user bg-[#e1f1ffff] ml-auto",
+    assistant: "bubble assistant bg-[#dcb7ff]",
+    system: "bubble system bg-[#f1f1f1]",
   };
 
+  // Fallback to 'user' role if no valid role is provided
+  const appliedClass = bubbleClass[role] || bubbleClass.user;
+
   return (
-    <div
-      style={{
-        padding: "10px",
-        borderRadius: "10px",
-        marginBottom: "10px",
-        maxWidth: "60%",
-        ...bubbleStyles[role],
-      }}
-    >
-      {content}
+    <div className={appliedClass}>
+      <div className="p-3 text-sm break-words">{content}</div>
     </div>
   );
+};
+
+// Prop validation using TypeScript
+Bubble.propTypes = {
+  message: PropTypes.shape({
+    content: PropTypes.string.isRequired,
+    role: PropTypes.oneOf(["user", "assistant", "system"]).isRequired,
+  }).isRequired,
 };
 
 export default Bubble;
